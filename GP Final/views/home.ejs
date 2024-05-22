@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="text-center">Welcome <%= name %></h1>
+                    </div>
+                    <div class="card-body">
+                        <p class="lead text-center">Welcome to our Game Specification Requirement Database system. You can use our system to check the minimum and recommended requirements for each game specified in this database. The system provides a way for users to manually add, delete, and update game specification documents, and search with filters or by the name of the game.</p>
+                        <hr>
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <a href="/create" class="btn btn-primary btn-block mb-3">Create Game Specification Document</a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="/showAll" class="btn btn-primary btn-block mb-3">Show All Game Specification Documents</a>
+                            </div>
+                        </div>
+                        <form action="/logout" method="get">
+                            <button type="submit" class="btn btn-danger btn-block">Logout</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

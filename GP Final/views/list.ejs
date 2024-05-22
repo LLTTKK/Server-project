@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List all game documents</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #999;
+            padding: 0.5rem;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="text-center">List of all game documents</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <form action="/search" method="get" class="form-inline">
+                                    <div class="form-group">
+                                        <input type="text" name="name" placeholder="Search by game name" class="form-control mr-2">
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <button onclick="window.location='/home';" class="btn btn-secondary">Back to home page</button>
+                            </div>
+                        </div>
+                        <% if (games.length > 0) { %>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Name of the Game</th>
+                                        <th>Minimum OS</th>
+                                        <th>Recommended OS</th>
+                                        <th>Minimum Processor</th>
+                                        <th>Recommended Processor</th>
+                                        <th>Minimum Memory</th>
+                                        <th>Recommended Memory</th>
+                                        <th>Minimum Graphics</th>
+                                        <th>Recommended Graphics</th>
+                                        <th>Minimum Storage</th>
+                                        <th>Recommended Storage</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% games.forEach(game => { %>
+                                    <tr>
+                                        <td><%= game.name %></td>
+                                        <td><%= game.os.minimum %></td>
+                                        <td><%= game.os.recommended %></td>
+                                        <td><%= game.processor.minimum %></td>
+                                        <td><%= game.processor.recommended %></td>
+                                        <td><%= game.memory.minimum %> GB</td>
+                                        <td><%= game.memory.recommended %> GB</td>
+                                        <td><%= game.graphics.minimum %></td>
+                                        <td><%= game.graphics.recommended %></td>
+                                        <td><%= game.storage.minimum %> GB</td>
+                                        <td><%= game.storage.recommended %> GB</td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal<%= game._id %>">Edit</button>
+                                            <button onclick="window.location='/delete/<%= game._id %>';" class="btn btn-danger">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <div class="modal fade" id="editModal<%= game._id %>" tabindex="-1" role="dialog" aria-labelledby="editModalLabel<%= game._id %>" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="editModalLabel<%= game._id %>">Edit Game</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form id="editForm" action="/update" method="post">
+                                                        <div class="form-group">
+                                                            <input type="hidden" id="id" name="id" value="<%= game._id %>">
+                                                            <label for="gameName">Game Name</label>
+                                                            <input type="text" class="form-control" id="name" name="name" value="<%= game.name %>">
+                                                            <label for="gameName">Minimum OS</label>
+                                                            <input type="text" class="form-control" id="min_os" name="min_os" value="<%= game.os.minimum %>">
+                                                            <label for="gameName">Recommended OS</label>
+                                                            <input type="text" class="form-control" id="rec_os" name="rec_os" value="<%= game.os.recommended %>">
+                                                            <label for="gameName">Minimum Processor</label>
+                                                            <input type="text" class="form-control" id="min_processor" name="min_processor" value="<%= game.processor.minimum %>">
+                                                            <label for="gameName">Recommended Processor</label>
+                                                            <input type="text" class="form-control" id="rec_processor" name="rec_processor" value="<%= game.processor.recommended %>">
+                                                            <label for="gameName">Minimum Memory</label>
+                                                            <input type="text" class="form-control" id="min_memory" name="min_memory" value="<%= game.memory.minimum %>">
+                                                            <label for="gameName">Recommended Memory</label>
+                                                            <input type="text" class="form-control" id="rec_memory" name="rec_memory" value="<%= game.memory.recommended %>">
+                                                            <label for="gameName">Minimum Graphics</label>
+                                                            <input type="text" class="form-control" id="min_graphics" name="min_graphics" value="<%= game.graphics.minimum %>">
+                                                            <label for="gameName">Recommended Graphics</label>
+                                                            <input type="text" class="form-control" id="rec_graphics" name="rec_graphics" value="<%= game.graphics.recommended %>">
+                                                            <label for="gameName">Minimum Storage</label>
+                                                            <input type="text" class="form-control" id="storage" name="min_storage" value="<%= game.storage.minimum %>">
+                                                            <label for="gameName">Recommended Storage</label>
+                                                            <input type="text" class="form-control" id="rec_storage" name="rec_storage" value="<%= game.storage.recommended %>">
+                                                        </div>
+                                                        <!-- Add more fields for the other properties -->
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% }); %>
+                                </tbody>
+                            </table>
+                        </div>
+                        <% } else { %>
+                            <p>No games found in the database.</p>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

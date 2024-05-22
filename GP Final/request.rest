@@ -1,0 +1,52 @@
+###
+
+GET http://localhost:8099/users
+
+###
+
+POST http://localhost:8099/singup
+Content-Type: application/json
+
+{
+    "name": "L",
+    "password" : "K"
+}
+
+###
+
+POST http://localhost:8099/login
+Content-Type: application/json
+
+{
+    "name": "user1",
+    "password" : "cs381"
+}
+
+###
+
+POST http://localhost:8099/Admin-login
+Content-Type: application/json
+
+{
+    "name": "Admin",
+    "password" : "Admin"
+}
+###
+
+POST http://localhost:8099/login
+Content-Type: application/json
+
+{
+    "name": "L",
+    "password" : "K"
+}
+
+###
+
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "name": "L",
+    "password" : "K"
+}

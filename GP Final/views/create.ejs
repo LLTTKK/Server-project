@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Game Information</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        label {
+            font-size: 1.3em;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="text-center">Create Game Specification Form</h1>
+                    </div>
+                    <div class="card-body">
+                        <form action="/create" method="post">
+                            <div class="form-group">
+                                <label for="name">Name*</label>
+                                <input type="text" id="name" name="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="min_os">Minimum OS*</label>
+                                <input type="text" id="min_os" name="min_os" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="rec_os">Recommended OS*</label>
+                                <input type="text" id="rec_os" name="rec_os" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="min_processor">Minimum Processor*</label>
+                                <input type="text" id="min_processor" name="min_processor" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="rec_processor">Recommended Processor*</label>
+                                <input type="text" id="rec_processor" name="rec_processor" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="min_memory">Minimum Memory* (GB)</label>
+                                <input type="number" id="min_memory" name="min_memory" class="form-control" required min="2">
+                                <small class="form-text text-muted">At least 2 GB</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="rec_memory">Recommended Memory* (GB)</label>
+                                <input type="number" id="rec_memory" name="rec_memory" class="form-control" required min="2">
+                                <small class="form-text text-muted">At least 2 GB</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="min_graphics">Minimum Graphics*</label>
+                                <input type="text" id="min_graphics" name="min_graphics" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="rec_graphics">Recommended Graphics*</label>
+                                <input type="text" id="rec_graphics" name="rec_graphics" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="min_storage">Minimum Storage* (GB)</label>
+                                <input type="number" id="min_storage" name="min_storage" class="form-control" required>
+                                <small class="form-text text-muted">Format: XXX (Only available for number)</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="rec_storage">Recommended Storage* (GB)</label>
+                                <input type="number" id="rec_storage" name="rec_storage" class="form-control" required>
+                                <small class="form-text text-muted">Format: XXX (Only available for number)</small>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Create</button>
+                                <a href="/home" class="btn btn-secondary">Back to home page</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% if (message) { %>
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+            <div class="toast-header">
+                <strong class="mr-auto">Notification</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                <%= message %>
+            </div>
+        </div>
+    <% } %>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.toast').toast('show');
+        });
+    </script>
+</body>
+</html>
